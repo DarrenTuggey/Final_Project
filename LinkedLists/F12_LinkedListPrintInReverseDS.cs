@@ -89,10 +89,9 @@ namespace LinkedLists
             {
                 Console.WriteLine(item);
             }
-
         }
 
-        static void Main() 
+        static void Function12() 
         {
             int tests = Convert.ToInt32(Console.ReadLine());
             for (int testsItr = 0; testsItr < tests; testsItr++) 

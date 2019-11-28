@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="LinkedLists\" />
     <Folder Include="Arrays\" />
   </ItemGroup>
 
