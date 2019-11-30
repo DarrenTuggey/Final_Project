@@ -19,9 +19,6 @@
 // For each test case, in a new line, print 1 if the two lists are equal, else print 0.
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 
 namespace LinkedLists
 {
@@ -68,38 +65,57 @@ namespace LinkedLists
             }
         }
 
-        static void PrintSinglyLinkedList(SinglyLinkedListNode node, string sep, TextWriter textWriter)
+        static void PrintSinglyLinkedList(SinglyLinkedListNode node, string sep)
         {
             while (node != null)
             {
-                textWriter.Write(node.data);
+                Console.Write(node.data);
 
                 node = node.next;
 
                 if (node != null)
                 {
-                    textWriter.Write(sep);
+                    Console.Write(sep);
                 }
             }
         }
         #endregion
 
+        // Solution
         static bool CompareLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2)
         {
+            // Initialize bool to return false
+            bool result = false; 
+            
+            // Iterate through the lists while they are equal
+            while (head1.data == head2.data) 
+            {
+                // Check if both lists are at the end, meaning they are equal and sets the result true
+                if (head1.next == null && head2.next == null) 
+                {
+                    result = true;
+                    break;
+                }
 
+                // Tests for a difference in length meaning definitely not equal and breaks out of the loop
+                if ((head1.next == null && head2.next != null) || (head1.next != null && head2.next == null)) 
+                {                                                                                             
+                    break;
+                }
 
+                head1 = head1.next;
+                head2 = head2.next;
+            }
+            return result;
         }
 
-        static void Main(string[] args)
+        static void Function14()
         {
-            TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
-
             int tests = Convert.ToInt32(Console.ReadLine());
 
             for (int testsItr = 0; testsItr < tests; testsItr++)
             {
                 SinglyLinkedList llist1 = new SinglyLinkedList();
-
                 int llist1Count = Convert.ToInt32(Console.ReadLine());
 
                 for (int i = 0; i < llist1Count; i++)
@@ -118,13 +134,11 @@ namespace LinkedLists
                     llist2.InsertNode(llist2Item);
                 }
 
+                Console.WriteLine();
                 bool result = CompareLists(llist1.head, llist2.head);
-
-                textWriter.WriteLine((result ? 1 : 0));
+                Console.WriteLine((result ? 1 : 0));
+                Console.WriteLine();
             }
-
-            textWriter.Flush();
-            textWriter.Close();
         }
     }
 }
@@ -148,21 +162,52 @@ Sample Output
 0
 1
 
-Actual Output
-5 4 3 2 1 
+Actual Output 
+0
+1
+
+* * * Output will be separated by the input lines like below * * *
+2
+2
+1
+2
+1
+1
+
+0 <-- Output
+
+2
+1
+2
+2
+1
+2
+
+1 <-- Output
 
 Sample Input
-1
-4
-3
-4
 2
-5
+3
+3
+2
+2
+3
+3
+2
+2
+2
+2
+1
+2
+1
+2
 
 Sample Output
-5 2 4 3
+1
+0
 
 Actual Output
-5 2 4 3
+1
+0
 
 */
