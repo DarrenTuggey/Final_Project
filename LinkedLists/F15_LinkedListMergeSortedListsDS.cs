@@ -25,7 +25,7 @@ namespace LinkedLists
 {
     partial class LinkedListMergeSortedListsDS
     {
-        #region Default code but modified to use console vice Console
+        #region Default code but modified to use console vice textwriter
         class SinglyLinkedListNode
         {
             public int data;
