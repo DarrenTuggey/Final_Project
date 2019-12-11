@@ -18,18 +18,6 @@
 // The ouput is handled by the code in the editor and is as follows:
 // For each test case, print the elements of the sorted doubly-linked list separated by spaces on a new line.
 
-using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text.RegularExpressions;
-using System.Text;
 using System;
 
 namespace LinkedLists
@@ -98,26 +86,22 @@ namespace LinkedLists
         #endregion
 
         // Solution
-        // Complete the sortedInsert function below.
-
-        /*
-         * For your reference:
-         *
-         * DoublyLinkedListNode {
-         *     int data;
-         *     DoublyLinkedListNode next;
-         *     DoublyLinkedListNode prev;
-         * }
-         *
-         */
         static DoublyLinkedListNode sortedInsert(DoublyLinkedListNode head, int data)
         {
+            // Create a new node with data
             DoublyLinkedListNode newNode = new DoublyLinkedListNode(data);
+
+            // Create a node to traverse instead of using head
             DoublyLinkedListNode node = head;
+
+            // Loop through the list
             while (node != null)
             {   
+                // Check if the new node data is greater than the current node data
                 if (data > node.data)
                 {
+                    // Check if the next node is null/end of list and if so insert the new node as the next node and then break from the loop
+                    // and if not move to the next node
                     if (node.next == null)
                     {
                         node.next = newNode;
@@ -130,6 +114,8 @@ namespace LinkedLists
                 }
                 else
                 {
+                    // Checks if the previous node is null/beginning of list and if so assigns the current node as the next after the new node 
+                    // and assigns the new node as the head then breaks from the loop.
                     if (node.prev == null)
                     {
                         newNode.next = node;
@@ -138,9 +124,15 @@ namespace LinkedLists
                     }
                     else
                     {
+                        // Assigns the previous node's next to the new node
                         node.prev.next = newNode;
+                        // Then the new node's next to the current node
                         newNode.next = node;
+                        // Then new node's previous to the current node's previous
                         newNode.prev = node.prev;
+                        // Then the current node's previous to the new node
+                        node.prev = newNode;
+                        // Then breaks from the loop
                         break;
                     }
                 }
@@ -148,7 +140,7 @@ namespace LinkedLists
             return head;
         }
 
-        static void Main(string[] args)
+        static void Function20()
         {
             int t = Convert.ToInt32(Console.ReadLine());
 
